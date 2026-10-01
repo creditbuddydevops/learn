@@ -1,5 +1,6 @@
 import React from "react";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { Button052 } from "@/components/extrafazant/Button052";
 import { DrawLineLink } from "@/components/extrafazant/DrawLineLink";
 
@@ -130,6 +131,32 @@ const CASE_DATA: Record<
     ],
   },
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const data = CASE_DATA[slug];
+
+  if (!data) {
+    return { title: "Course not found" };
+  }
+
+  return {
+    title: data.title,
+    description: data.lead,
+    openGraph: {
+      title: `${data.title} — CreditBuddy Learn`,
+      description: data.lead,
+      type: "article",
+      images: [{ url: data.heroImg, width: 1200, height: 630, alt: data.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${data.title} — CreditBuddy Learn`,
+      description: data.lead,
+      images: [data.heroImg],
+    },
+  };
+}
 
 export async function generateStaticParams() {
   return Object.keys(CASE_DATA).map((slug) => ({ slug }));
