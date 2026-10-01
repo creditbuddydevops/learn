@@ -1,38 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CreditBuddy Learn
 
-## Getting Started
+**Financial literacy platform by CREDITBUDDY PARTNERS PRIVATE LIMITED**
 
-First, run the development server:
+Master credit scores, loan underwriting, interest rates, and debt management — without the banking jargon.
+
+---
+
+## Tech stack
+
+| Layer | Technology |
+|-------|-----------|
+| Framework | Next.js 16 (App Router, Turbopack) |
+| Auth | Firebase Authentication (Google OAuth + Email/Password) |
+| Database | Cloud Firestore |
+| Security | reCAPTCHA Enterprise |
+| Styling | Tailwind CSS |
+| Deployment | Vercel |
+
+## Features
+
+- **Role-based access** — Student, Moderator, and Admin dashboards
+- **Google sign-in** with Firebase Auth
+- **reCAPTCHA Enterprise** protection on all auth flows
+- **Course tracks** — Credit Score Mastery, Loan Math & Underwriting, Debt Payoff & Cashflow, and more
+- **Privacy-first** — all secrets in environment variables, never hardcoded
+- **SEO optimized** — structured data, Open Graph, meta tags, sitemap, robots.txt
+
+## Getting started
+
+### Prerequisites
+
+- Node.js 18+
+- npm 9+
+- A Firebase project with Authentication and Firestore enabled
+
+### Setup
 
 ```bash
+# Clone the repo
+git clone https://github.com/creditbuddydevops/learn.git
+cd learn
+
+# Install dependencies
+npm install
+
+# Create your environment file
+cp .env.example .env.local
+# Fill in your Firebase and reCAPTCHA keys (see below)
+
+# Start the dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Environment variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Create a `.env.local` file in the project root:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```env
+NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=learn.creditbuddy.org.in
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=learn-creditbuddy
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your_measurement_id
+NEXT_PUBLIC_RECAPTCHA_SITE_KEY=your_recaptcha_site_key
+```
 
-## Learn More
+> **Important:** Never commit `.env.local` — it is already in `.gitignore`.
 
-To learn more about Next.js, take a look at the following resources:
+## Project structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/
+├── app/                  # Next.js App Router pages
+│   ├── dashboard/        # Student/Moderator/Admin dashboard
+│   ├── login/            # Auth page (Google + Email)
+│   ├── privacy/          # Privacy policy
+│   ├── terms/            # Terms of service
+│   ├── werk/             # Course tracks
+│   └── ...
+├── components/           # Reusable UI components
+├── context/              # React context providers (Auth)
+├── hooks/                # Custom hooks (reCAPTCHA, etc.)
+└── lib/                  # Firebase config and utilities
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## User roles
 
-## Deploy on Vercel
+| Role | Access |
+|------|--------|
+| **Student** | Default role. Access to enrolled courses, progress tracking, learning materials |
+| **Moderator** | Manages curriculum content and reviews student submissions |
+| **Admin** | Full platform access — user management, content, settings |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+All users start as Students. Admins can promote users from the dashboard.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Scripts
 
-# learn_creditbuddy
+```bash
+npm run dev       # Start development server
+npm run build     # Production build
+npm run start     # Start production server
+npm run lint      # Run ESLint
+```
+
+## License
+
+Proprietary — © 2024–2026 CREDITBUDDY PARTNERS PRIVATE LIMITED. All rights reserved.

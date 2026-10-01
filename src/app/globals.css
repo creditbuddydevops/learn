@@ -1,37 +1,88 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Serrif';
+  src: url("https://cdn.prod.website-files.com/6a7eba014f1644e9f15be52d/6a7ebd4436a60a6d6371bc46_SerrifCompressedUprightsVF.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Now';
+  src: url("https://cdn.prod.website-files.com/6a7eba014f1644e9f15be52d/6a7ebfaa43fc4e2a6b247556_HelveticaNowVar.woff2") format("woff2");
+  font-weight: 50 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  /* Cobalt blue scrapbook canvas from image */
-  --bg-cobalt: #2952E3;
-  --bg-cobalt-dark: #1E3EB8;
-  --bg-cobalt-light: #3D66F5;
+  /* CreditBuddy Logo Color Palette */
+  --color-indigo: #21105b;
+  --color-green: #05aa38;
+  --color-yellow: #fec602;
+  --color-blue: #21105b;
+  --color-pink: #05aa38;
+  --color-orange: #05aa38;
+  --color-coral: #21105b;
+  --color-black: #101010;
+  --color-dark: #131313;
+  --color-off-white: #f4f4f4;
+  --color-white: #ffffff;
+  --color-muted: #888888;
 
-  /* Paper & sticky note surfaces */
-  --paper-white: #FFFFFF;
-  --paper-ruled: #F8F9FA;
-  --note-green: #D1FAE5;
-  --note-green-border: #A7F3D0;
-  --note-peach: #FED7AA;
-  --note-peach-border: #FDBA74;
-  --note-yellow: #FEF08A;
-  --note-yellow-border: #FDE047;
-  --note-blue: #E0E7FF;
-  --note-blue-border: #C7D2FE;
-  
-  /* Washi tape & sticker colors */
-  --tape-orange: #FF7043;
-  --tape-mint: #6EE7B7;
-  --tape-yellow: #FCD34D;
-  
-  /* Brand text */
-  --text-dark: #1E293B;
-  --text-muted: #64748B;
-  --brand-emerald: #00C48C;
+  /* Spacing & Sizing Scale */
+  --size-unit: 16;
+  --size-container-ideal: 1920;
+  --size-container-min: 992px;
+  --size-container-max: 3840px;
+  --size-container-fluid: 100vw;
+  --size-container: clamp(var(--size-container-min), var(--size-container-fluid), var(--size-container-max));
+  --size-font: calc(var(--size-container) / (var(--size-container-ideal) / var(--size-unit)));
 
-  /* Font variables */
-  --font-hand: var(--font-kalam), "Comic Sans MS", cursive;
-  --font-display: var(--font-sora), sans-serif;
-  --font-body: var(--font-inter), sans-serif;
+  /* Button 052 Tokens */
+  --button-052-color: #131313;
+  --button-052-color-background: #fff;
+  --button-052-color-focus: #21105b;
+  --button-052-height: 3.25em;
+  --button-052-padding-x: 1.25em;
+  --button-052-focus-inset: -0.125em;
+  --button-052-ease-hover: cubic-bezier(0.25, 1, 0.5, 1);
+  --button-052-ease-soft-overshoot: cubic-bezier(0.59, 1, 0.88, 1.01);
+  --button-052-ease-bounce: cubic-bezier(0.34, 2.27, 0.64, 1);
+
+  /* Button 093 Tokens */
+  --button-093-dot-color: var(--color-indigo);
+  --button-093-first-dot-color: var(--color-green);
+  --button-093-second-dot-color: var(--color-yellow);
+  --button-093-third-dot-color: var(--color-green);
+}
+
+@media screen and (max-width: 991px) {
+  :root {
+    --size-container-ideal: 991;
+    --size-container-min: 768px;
+    --size-container-max: 991px;
+    --size-font: 16px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  :root {
+    --size-container-ideal: 767;
+    --size-container-min: 480px;
+    --size-container-max: 767px;
+    --size-font: 15px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  :root {
+    --size-container-ideal: 479;
+    --size-container-min: 320px;
+    --size-container-max: 479px;
+    --size-font: 14px;
+  }
 }
 
 * {
@@ -39,197 +90,366 @@
 }
 
 html {
-  background-color: var(--bg-cobalt);
-  color: var(--text-dark);
-  font-family: var(--font-body);
-  scroll-behavior: smooth;
+  font-size: var(--size-font);
+  background-color: var(--color-off-white);
+  color: var(--color-black);
+  font-family: 'Helvetica Now', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background-color: var(--bg-cobalt);
-  color: var(--text-dark);
-  min-height: 100vh;
   margin: 0;
   padding: 0;
-  /* Paper wrinkle / subtle tactile texture on royal blue */
-  background-image: 
-    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 60%),
-    radial-gradient(circle at 10% 20%, rgba(0, 0, 0, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 90% 80%, rgba(0, 0, 0, 0.08) 0%, transparent 40%);
+  background-color: var(--color-off-white);
+  color: var(--color-black);
+  overflow-x: hidden;
+  cursor: url("https://cdn.prod.website-files.com/6a7eba014f1644e9f15be52d/6a7efd2a38121cbf2072df25_6bd10a5e7dff3afb845ff5b8fd083d78_cursor-default.svg") 3 0, auto;
 }
 
-.font-hand {
-  font-family: var(--font-hand);
+body :is(a, button, [role="button"], input[type="submit"]) {
+  cursor: url("https://cdn.prod.website-files.com/6a7eba014f1644e9f15be52d/6a7efd2a1b7a0864f5feade5_f6011f382277fbdc8617d2ad8731c99b_cursor-pointer.svg") 18 0, pointer;
 }
 
-.font-heading {
-  font-family: var(--font-display);
+body :is(p, h1, h2, h3, h4, h5, h6, span) {
+  cursor: url("https://cdn.prod.website-files.com/6a7eba014f1644e9f15be52d/6a7efdaa0b6336d15ded23e1_2666cf554f4582822b5b4a4ac14c675e_cursor-text.svg") 14 29, text;
 }
 
-/* Washi Tape styling */
-.washi-tape-orange {
-  background-color: #FF7748;
-  background-image: repeating-linear-gradient(
-    45deg,
-    rgba(255, 255, 255, 0.35) 0,
-    rgba(255, 255, 255, 0.35) 6px,
-    transparent 6px,
-    transparent 12px
-  );
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-  opacity: 0.95;
+/* Custom selection */
+::selection {
+  background: var(--color-blue);
+  color: #ffffff;
 }
 
-.washi-tape-green {
-  background-color: #79E2A8;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
-  opacity: 0.9;
+/* Hide scrollbars cleanly */
+::-webkit-scrollbar {
+  display: none;
+}
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-.washi-tape-white {
-  background-color: rgba(255, 255, 255, 0.85);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+/* Typography styles */
+.heading-alt {
+  font-family: 'Serrif', Georgia, serif;
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: -0.01em;
 }
 
-/* Notebook paper with spiral rings */
-.notebook-card {
-  background-color: #FFFFFF;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.18), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
-  position: relative;
-}
-
-/* Sticky notes */
-.sticky-note-green {
-  background-color: #D6F8E8;
-  border: 1px solid #A6F0CA;
-  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.sticky-note-peach {
-  background-color: #FFDDC8;
-  border: 1px solid #FFC9A8;
-  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.sticky-note-yellow {
-  background-color: #FEF9C3;
-  border: 1px solid #FEF08A;
-  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.sticky-note-blue {
-  background-color: #DBEAFE;
-  border: 1px solid #BFDBFE;
-  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Polaroid Photo Card styling */
-.polaroid-card {
-  background-color: #FFFFFF;
-  padding: 12px 12px 24px 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  transition: transform 200ms ease-out;
-}
-
-.polaroid-card:hover {
-  transform: translateY(-4px) rotate(0deg) !important;
-}
-
-/* Torn paper bottom */
-.torn-paper {
-  background-color: #FFFFFF;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  position: relative;
-}
-
-.torn-paper::after {
-  content: "";
-  position: absolute;
-  bottom: -10px;
-  left: 0;
-  right: 0;
-  height: 10px;
-  background: radial-gradient(circle, transparent, transparent 50%, #ffffff 50%, #ffffff 100%);
-  background-size: 16px 16px;
-}
-
-/* Buttons adapted to tactile scrapbook style */
-.btn-tape-black {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background-color: #111111;
-  color: #FFFFFF;
-  font-weight: 600;
-  font-size: 15px;
-  padding: 12px 24px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  transition: transform 150ms ease-out, background-color 150ms ease-out;
-}
-
-.btn-tape-black:hover {
-  transform: translateY(-2px);
-  background-color: #262626;
-}
-
-.btn-tape-emerald {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background-color: #00C48C;
-  color: #064E3B;
+.heading-xxl {
+  font-size: clamp(3.2rem, 9.5vw, 11rem);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
   font-weight: 700;
-  font-size: 15px;
-  padding: 12px 24px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 196, 140, 0.3);
-  transition: transform 150ms ease-out;
 }
 
-.btn-tape-emerald:hover {
-  transform: translateY(-2px);
-  background-color: #00B37F;
+.heading-xl {
+  font-size: clamp(2.75rem, 7.5vw, 8rem);
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+  font-weight: 700;
 }
 
-.btn-tape-white {
+.heading-l {
+  font-size: clamp(2.2rem, 5vw, 5.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+}
+
+.heading-m {
+  font-size: clamp(1.8rem, 3.5vw, 3.8rem);
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+}
+
+.eyebrow-l {
+  font-size: clamp(1rem, 1.35vw, 1.4rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--color-black);
+  opacity: 0.85;
+}
+
+.eyebrow-m {
+  font-size: clamp(0.95rem, 1.15vw, 1.25rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--color-black);
+  opacity: 0.85;
+}
+
+.eyebrow-s {
+  font-size: clamp(0.85rem, 1vw, 1.1rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.paragraph-m {
+  font-size: clamp(1.05rem, 1.25vw, 1.35rem);
+  line-height: 1.45;
+  letter-spacing: -0.025em;
+}
+
+/* Character reveal line masking */
+.line-mask {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: bottom;
+  padding-bottom: 0.05em;
+  margin-bottom: -0.05em;
+}
+
+.char {
+  display: inline-block;
+  will-change: transform, font-weight;
+}
+
+/* Button 052 (Interactive pill with spring bounce) */
+.button-052 {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: var(--button-052-height);
+  padding: 0 var(--button-052-padding-x);
+  background-color: var(--button-052-color-background);
+  color: var(--button-052-color);
+  border-radius: 9999px;
+  font-size: 1.05em;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.button-052:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.button-052__text-wrap {
+  display: inline-block;
+  will-change: transform;
+  transition: translate 0.75s var(--button-052-ease-hover), rotate 0.75s var(--button-052-ease-hover), transform 0.15s var(--button-052-ease-soft-overshoot);
+}
+
+.button-052:hover .button-052__text-wrap {
+  translate: -0.5em -0.2em 0;
+  rotate: -3deg;
+  transform: scale(1.04, 1.06);
+}
+
+.button-052__icon-wrap {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  background-color: #FFFFFF;
-  color: #111111;
+  width: 1.6em;
+  height: 1.6em;
+  margin-right: 0.5em;
+  position: relative;
+}
+
+.button-052__icon-wrap.is--default {
+  transition: transform 0.6s var(--button-052-ease-hover), opacity 0.15s ease-out;
+}
+
+.button-052:hover .button-052__icon-wrap.is--default {
+  transform: scale(0);
+  opacity: 0;
+}
+
+.button-052__icon-wrap.is--hover {
+  position: absolute;
+  left: var(--button-052-padding-x);
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 0.6s var(--button-052-ease-hover), opacity 0.15s ease-out;
+}
+
+.button-052:hover .button-052__icon-wrap.is--hover {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Button 093 ("Contact" nav button with colorful dots) */
+.button-093 {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.65em 1.25em 0.65em 1em;
+  background-color: #ffffff;
+  color: #131313;
+  border-radius: 9999px;
+  font-size: 0.95rem;
   font-weight: 600;
-  font-size: 15px;
-  padding: 12px 24px;
-  border-radius: 12px;
-  border: 1px solid #E2E8F0;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
-  transition: transform 150ms ease-out;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1), box-shadow 0.3s ease;
 }
 
-.btn-tape-white:hover {
-  transform: translateY(-2px);
-  background-color: #F8FAFC;
+.button-093:hover {
+  transform: scale(1.04);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
-/* Container */
-.cb-container {
-  width: 100%;
-  max-width: 1240px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 20px;
-  padding-right: 20px;
+.button-093__dot-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
+  margin-right: 0.55em;
+  position: relative;
+  width: 0.65em;
+  height: 0.65em;
 }
 
-@media (min-width: 768px) {
-  .cb-container {
-    padding-left: 32px;
-    padding-right: 32px;
+.button-093__dot {
+  position: absolute;
+  width: 0.55em;
+  height: 0.55em;
+  border-radius: 50%;
+  transform-origin: calc((100% + 0.25em) * -1) 50%;
+  transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.button-093__dot.is--first {
+  background-color: var(--color-pink);
+  box-shadow: 0 0 0 0.5px var(--color-pink);
+}
+
+.button-093__dot.is--second {
+  background-color: var(--color-blue);
+}
+
+.button-093__dot.is--third {
+  background-color: var(--color-orange);
+}
+
+.button-093:hover .button-093__dot.is--first {
+  transform: rotate(0deg) scale(1);
+}
+
+.button-093:hover .button-093__dot.is--second {
+  transform: rotate(25deg) scale(1);
+  transition-delay: 0.04s;
+}
+
+.button-093:hover .button-093__dot.is--third {
+  transform: rotate(50deg) scale(1);
+  transition-delay: 0.08s;
+}
+
+.button-093__text-wrap {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  height: 1.3em;
+  line-height: 1.3;
+}
+
+.button-093__text {
+  display: block;
+  transform-origin: left center;
+  transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.button-093__text.is--default {
+  transform: translateY(0) rotate(0deg);
+}
+
+.button-093:hover .button-093__text.is--default {
+  transform: translateY(-130%) rotate(-25deg);
+}
+
+.button-093__text.is--hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(130%) rotate(25deg);
+}
+
+.button-093:hover .button-093__text.is--hover {
+  transform: translateY(0) rotate(0deg);
+}
+
+/* Custom Cursor Pill Marquee */
+.cursor-marquee {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cursor-marquee {
+    display: block;
   }
+}
+
+.cursor-marquee__card {
+  background-color: var(--color-blue);
+  color: #ffffff;
+  padding: 0.6em 1.25em;
+  border-radius: 9999px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 10px 30px rgba(0, 56, 255, 0.35);
+  transition: transform 0.35s cubic-bezier(0.75, 0, 0.25, 1), opacity 0.2s ease, clip-path 0.35s ease;
+  clip-path: inset(calc(50% - 0.25em) round 50em);
+  opacity: 0;
+  transform: translateY(0%) scale(0.85);
+}
+
+[data-cursor-marquee-status="active"] .cursor-marquee__card {
+  clip-path: inset(0 round 50em);
+  transform: translateY(-30%) scale(1);
+  opacity: 1;
+}
+
+/* Draw-line SVG container */
+[data-draw-line-box] svg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  bottom: -0.35em;
+  overflow: visible;
+  pointer-events: none;
+}
+
+/* 3D Stack container */
+.featured-perspective-root {
+  perspective: 1400px;
+  transform-style: preserve-3d;
+}
+
+.featured-slide-3d {
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+/* Infinite marquee */
+@keyframes marqueeLeft {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
 }

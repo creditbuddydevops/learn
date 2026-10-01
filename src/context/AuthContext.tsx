@@ -10,216 +10,216 @@ import {
   onAuthStateChanged,
   updateProfile
 } from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { 
+  doc, 
+  getDoc, 
+  setDoc, 
+  updateDoc, 
+  collection, 
+  getDocs,
+  onSnapshot
+} from "firebase/firestore";
 import { auth, db, googleProvider } from "@/lib/firebase";
 
-export type UserRole = "student" | "creator" | "mentor" | "admin";
+export type UserRole = "student" | "moderator" | "admin";
 
 export interface UserProfile {
   uid: string;
   email: string | null;
   displayName: string | null;
+  photoURL?: string | null;
   role: UserRole;
+  createdAt?: string;
+  lastLoginAt?: string;
   college?: string;
   avatarInitials?: string;
-  createdAt?: string;
 }
 
 interface AuthContextType {
   user: User | null;
   userProfile: UserProfile | null;
+  activeRole: UserRole;
+  setActiveRole: (role: UserRole) => void;
   loading: boolean;
-  login: (email: string, pass: string) => Promise<void>;
-  signup: (email: string, pass: string, name: string, college?: string) => Promise<void>;
   loginWithGoogle: () => Promise<void>;
+  loginWithEmail: (email: string, pass: string) => Promise<void>;
+  signupWithEmail: (email: string, pass: string, name: string) => Promise<void>;
   logout: () => Promise<void>;
-  refreshProfile: () => Promise<void>;
+  updateUserRole: (targetUid: string, newRole: UserRole) => Promise<void>;
+  fetchAllUsers: () => Promise<UserProfile[]>;
 }
 
-const DEFAULT_STUDENT_PROFILE: UserProfile = {
-  uid: "student-101",
-  email: "student@creditbuddy.org.in",
-  displayName: "Pratik Nayak",
+const DEFAULT_GUEST_PROFILE: UserProfile = {
+  uid: "guest-demo",
+  email: "student@creditbuddy.co.in",
+  displayName: "Learner Guest",
   role: "student",
-  college: "VSSUT Burla (Sambalpur)",
-  avatarInitials: "PN",
-  createdAt: "2026-09-01",
+  createdAt: new Date().toISOString(),
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  const [userProfile, setUserProfile] = useState<UserProfile | null>(DEFAULT_STUDENT_PROFILE);
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+  const [activeRole, setActiveRole] = useState<UserRole>("student");
   const [loading, setLoading] = useState<boolean>(true);
 
-  const fetchUserProfile = async (firebaseUser: User) => {
+  // Sync profile from Firestore or initialize as student
+  const syncProfile = async (firebaseUser: User) => {
     try {
-      const userDocRef = doc(db, "users", firebaseUser.uid);
-      const snap = await getDoc(userDocRef);
-      
-      let assignedRole: UserRole = "student";
-      let college = "";
+      const userRef = doc(db, "users", firebaseUser.uid);
+      const snap = await getDoc(userRef);
+
+      const now = new Date().toISOString();
 
       if (snap.exists()) {
         const data = snap.data();
-        assignedRole = (data.role as UserRole) || "student";
-        college = data.college || "";
-      } else {
-        // Check if manually assigned in local storage for developer testing
-        const manualRole = (typeof window !== "undefined" && localStorage.getItem("cb_user_role")) as UserRole | null;
-        if (manualRole === "admin" || manualRole === "creator" || manualRole === "mentor") {
-          assignedRole = manualRole;
-        }
+        const role = (data.role as UserRole) || "student";
+        const profile: UserProfile = {
+          uid: firebaseUser.uid,
+          email: firebaseUser.email,
+          displayName: data.displayName || firebaseUser.displayName || "Member",
+          photoURL: firebaseUser.photoURL || null,
+          role,
+          createdAt: data.createdAt || now,
+          lastLoginAt: now,
+          avatarInitials: (data.displayName || firebaseUser.displayName || "CB")
+            .split(" ")
+            .map((n: string) => n[0])
+            .join("")
+            .substring(0, 2)
+            .toUpperCase(),
+        };
 
-        // Initialize Firestore document with default 'student' role
+        setUserProfile(profile);
+        setActiveRole(role);
+
+        // Update last login
         try {
-          await setDoc(userDocRef, {
-            uid: firebaseUser.uid,
-            email: firebaseUser.email,
-            displayName: firebaseUser.displayName || "CreditBuddy Student",
-            role: assignedRole,
-            college: college,
-            createdAt: new Date().toISOString(),
-          });
+          await updateDoc(userRef, { lastLoginAt: now });
         } catch {
-          // ignore if firestore rules prevent writing
+          // Ignore if permission issue
         }
-      }
+      } else {
+        // First login: every user is strictly "student"
+        const newProfile: UserProfile = {
+          uid: firebaseUser.uid,
+          email: firebaseUser.email,
+          displayName: firebaseUser.displayName || "Student",
+          photoURL: firebaseUser.photoURL || null,
+          role: "student",
+          createdAt: now,
+          lastLoginAt: now,
+        };
 
-      // Check manual override if set in browser storage
-      const manualOverride = typeof window !== "undefined" ? localStorage.getItem("cb_user_role") as UserRole | null : null;
-      if (manualOverride && (manualOverride === "admin" || manualOverride === "creator" || manualOverride === "mentor" || manualOverride === "student")) {
-        assignedRole = manualOverride;
-      }
+        try {
+          await setDoc(userRef, newProfile);
+        } catch (e) {
+          console.warn("Could not create user document in Firestore:", e);
+        }
 
-      setUserProfile({
+        setUserProfile(newProfile);
+        setActiveRole("student");
+      }
+    } catch (err) {
+      console.warn("Error fetching user profile:", err);
+      // Fallback local student profile
+      const fallback: UserProfile = {
         uid: firebaseUser.uid,
         email: firebaseUser.email,
-        displayName: firebaseUser.displayName || "CreditBuddy Member",
-        role: assignedRole,
-        college: college,
-        avatarInitials: (firebaseUser.displayName || "CB")
-          .split(" ")
-          .map((n) => n[0])
-          .join("")
-          .substring(0, 2)
-          .toUpperCase(),
-      });
-    } catch {
-      // Fallback
-      setUserProfile(DEFAULT_STUDENT_PROFILE);
+        displayName: firebaseUser.displayName || "Student",
+        photoURL: firebaseUser.photoURL || null,
+        role: "student",
+        createdAt: new Date().toISOString(),
+      };
+      setUserProfile(fallback);
+      setActiveRole("student");
     }
   };
 
   useEffect(() => {
-    // Check manual role override from developer console or storage
-    const manualRole = (typeof window !== "undefined" && localStorage.getItem("cb_user_role")) as UserRole | null;
-    if (manualRole) {
-      setUserProfile((prev) => ({
-        ...(prev || DEFAULT_STUDENT_PROFILE),
-        role: manualRole,
-      }));
-    }
-
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       setUser(firebaseUser);
       if (firebaseUser) {
-        await fetchUserProfile(firebaseUser);
+        await syncProfile(firebaseUser);
+
+        // Real-time listener on the user's document for instant role updates
+        const docRef = doc(db, "users", firebaseUser.uid);
+        const unsubDoc = onSnapshot(docRef, (docSnap) => {
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+            if (data.role) {
+              const updatedRole = data.role as UserRole;
+              setUserProfile((prev) => prev ? { ...prev, role: updatedRole } : null);
+              setActiveRole(updatedRole);
+            }
+          }
+        }, (error) => {
+          console.warn("Snapshot listener notice:", error);
+        });
+
+        setLoading(false);
+        return () => unsubDoc();
       } else {
-        // Keep default student profile for visitors
-        setUserProfile((prev) => ({
-          ...(prev || DEFAULT_STUDENT_PROFILE),
-          role: (manualRole as UserRole) || "student",
-        }));
+        setUserProfile(null);
+        setActiveRole("student");
+        setLoading(false);
       }
-      setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
 
-  const refreshProfile = async () => {
-    if (user) {
-      await fetchUserProfile(user);
-    } else {
-      const manualRole = (typeof window !== "undefined" && localStorage.getItem("cb_user_role")) as UserRole | null;
-      if (manualRole) {
-        setUserProfile((prev) => ({
-          ...(prev || DEFAULT_STUDENT_PROFILE),
-          role: manualRole,
-        }));
-      }
-    }
-  };
-
-  const login = async (email: string, pass: string) => {
-    try {
-      const cred = await signInWithEmailAndPassword(auth, email, pass);
-      setUser(cred.user);
-      await fetchUserProfile(cred.user);
-    } catch (err: unknown) {
-      console.warn("Firebase Auth error:", err);
-      throw err;
-    }
-  };
-
-  // Sign up is STRICTLY default student
-  const signup = async (
-    email: string, 
-    pass: string, 
-    name: string, 
-    college?: string
-  ) => {
-    const cred = await createUserWithEmailAndPassword(auth, email, pass);
-    await updateProfile(cred.user, { displayName: name });
-    
-    // Every user is strictly defaulted to 'student'
-    const defaultRole: UserRole = "student";
-
-    try {
-      await setDoc(doc(db, "users", cred.user.uid), {
-        uid: cred.user.uid,
-        email,
-        displayName: name,
-        role: defaultRole,
-        college: college || "",
-        createdAt: new Date().toISOString(),
-      });
-    } catch (e) {
-      console.warn("Could not save to firestore:", e);
-    }
-
-    const profile: UserProfile = {
-      uid: cred.user.uid,
-      email,
-      displayName: name,
-      role: defaultRole,
-      college,
-      avatarInitials: name.split(" ").map((n) => n[0]).join("").substring(0, 2).toUpperCase(),
-    };
-    setUser(cred.user);
-    setUserProfile(profile);
-  };
-
   const loginWithGoogle = async () => {
     try {
       const cred = await signInWithPopup(auth, googleProvider);
       setUser(cred.user);
+      await syncProfile(cred.user);
+    } catch (err: unknown) {
+      console.error("Google sign-in error:", err);
+      throw err;
+    }
+  };
+
+  const loginWithEmail = async (email: string, pass: string) => {
+    try {
+      const cred = await signInWithEmailAndPassword(auth, email, pass);
+      setUser(cred.user);
+      await syncProfile(cred.user);
+    } catch (err: unknown) {
+      console.error("Email login error:", err);
+      throw err;
+    }
+  };
+
+  const signupWithEmail = async (email: string, pass: string, name: string) => {
+    try {
+      const cred = await createUserWithEmailAndPassword(auth, email, pass);
+      await updateProfile(cred.user, { displayName: name });
+      
+      const now = new Date().toISOString();
       const userRef = doc(db, "users", cred.user.uid);
-      const snap = await getDoc(userRef);
-      if (!snap.exists()) {
-        await setDoc(userRef, {
-          uid: cred.user.uid,
-          email: cred.user.email,
-          displayName: cred.user.displayName,
-          role: "student", // Strictly default student
-          createdAt: new Date().toISOString(),
-        });
+      const newProfile: UserProfile = {
+        uid: cred.user.uid,
+        email,
+        displayName: name,
+        role: "student", // Strictly student first
+        createdAt: now,
+        lastLoginAt: now,
+      };
+
+      try {
+        await setDoc(userRef, newProfile);
+      } catch (e) {
+        console.warn("Could not save new user document to Firestore:", e);
       }
-      await fetchUserProfile(cred.user);
-    } catch (err) {
-      console.warn("Google sign-in error:", err);
+
+      setUser(cred.user);
+      setUserProfile(newProfile);
+      setActiveRole("student");
+    } catch (err: unknown) {
+      console.error("Email signup error:", err);
       throw err;
     }
   };
@@ -228,11 +228,54 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       await signOut(auth);
     } catch (e) {
-      console.warn("SignOut error:", e);
+      console.warn("Sign out error:", e);
     }
     setUser(null);
-    setUserProfile(DEFAULT_STUDENT_PROFILE);
-    localStorage.removeItem("cb_user_role");
+    setUserProfile(null);
+    setActiveRole("student");
+  };
+
+  // Admin function to update any user's role in Firestore
+  const updateUserRole = async (targetUid: string, newRole: UserRole) => {
+    try {
+      const targetRef = doc(db, "users", targetUid);
+      await updateDoc(targetRef, { role: newRole });
+      
+      // If updating own profile, update local state immediately
+      if (user && user.uid === targetUid) {
+        setUserProfile((prev) => prev ? { ...prev, role: newRole } : null);
+        setActiveRole(newRole);
+      }
+    } catch (err) {
+      console.error("Failed to update user role:", err);
+      throw err;
+    }
+  };
+
+  // Fetch all registered users for Admin User Directory
+  const fetchAllUsers = async (): Promise<UserProfile[]> => {
+    try {
+      const usersCol = collection(db, "users");
+      const snap = await getDocs(usersCol);
+      const list: UserProfile[] = [];
+      snap.forEach((d) => {
+        const data = d.data();
+        list.push({
+          uid: d.id,
+          email: data.email || null,
+          displayName: data.displayName || "Unnamed User",
+          photoURL: data.photoURL || null,
+          role: (data.role as UserRole) || "student",
+          createdAt: data.createdAt || "",
+          lastLoginAt: data.lastLoginAt || "",
+          college: data.college || "",
+        });
+      });
+      return list;
+    } catch (err) {
+      console.warn("Failed to fetch all users from Firestore:", err);
+      return [];
+    }
   };
 
   return (
@@ -240,12 +283,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       value={{
         user,
         userProfile,
+        activeRole,
+        setActiveRole,
         loading,
-        login,
-        signup,
         loginWithGoogle,
+        loginWithEmail,
+        signupWithEmail,
         logout,
-        refreshProfile,
+        updateUserRole,
+        fetchAllUsers,
       }}
     >
       {children}
