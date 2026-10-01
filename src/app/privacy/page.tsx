@@ -109,7 +109,7 @@ export default function PrivacyPage() {
                 <p><strong>CIN:</strong> U62090OD2026PTC053104</p>
                 <p><strong>GSTIN:</strong> 21AANCC6754D1ZS</p>
                 <p><strong>Registered City:</strong> Sambalpur, Odisha - 768004</p>
-                <p><strong>Support Email:</strong> legal@creditbuddy.co.in</p>
+                <p><strong>Support Email:</strong> legal@creditbuddy.org.in</p>
               </div>
             </div>
           </section>

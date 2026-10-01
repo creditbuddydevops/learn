@@ -4,7 +4,7 @@ import { SmoothScroll } from "@/components/extrafazant/SmoothScroll";
 import { AuthProvider } from "@/context/AuthContext";
 import { ClientLayout } from "@/components/extrafazant/ClientLayout";
 
-const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://learn.creditbuddy.co.in";
+const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://learn.creditbuddy.org.in";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

@@ -26,7 +26,7 @@ const FAQS = [
   },
   {
     q: "How can I get assistance with a loan application or credit dispute?",
-    a: "You can reach out to our team at support@creditbuddy.co.in or submit an inquiry through our Contact page. Our practitioners are available to guide you on financial education topics.",
+    a: "You can reach out to our team at support@creditbuddy.org.in or submit an inquiry through our Contact page. Our practitioners are available to guide you on financial education topics.",
   },
 ];
 

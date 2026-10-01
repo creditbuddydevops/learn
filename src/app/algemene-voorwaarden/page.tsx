@@ -53,8 +53,8 @@ export default function AlgemeneVoorwaardenPage() {
           </h2>
           <p>
             These terms are governed by the laws of India, with jurisdiction in Sambalpur, Odisha. For queries or notices, write to{" "}
-            <DrawLineLink href="mailto:support@creditbuddy.co.in" className="text-[#0038ff] font-semibold">
-              support@creditbuddy.co.in
+            <DrawLineLink href="mailto:support@creditbuddy.org.in" className="text-[#0038ff] font-semibold">
+              support@creditbuddy.org.in
             </DrawLineLink>.
           </p>
         </div>

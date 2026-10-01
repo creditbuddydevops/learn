@@ -51,7 +51,7 @@ interface AuthContextType {
 
 const DEFAULT_GUEST_PROFILE: UserProfile = {
   uid: "guest-demo",
-  email: "student@creditbuddy.co.in",
+  email: "student@creditbuddy.org.in",
   displayName: "Learner Guest",
   role: "student",
   createdAt: new Date().toISOString(),

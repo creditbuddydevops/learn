@@ -106,7 +106,7 @@ export default function DashboardPage() {
       setUserList([
         {
           uid: user?.uid || "usr-01",
-          email: user?.email || "pratik@creditbuddy.co.in",
+          email: user?.email || "pratik@creditbuddy.org.in",
           displayName: user?.displayName || "Pratik Nayak",
           role: (userProfile?.role as UserRole) || "admin",
           createdAt: "2026-09-15T10:00:00.000Z",
@@ -114,7 +114,7 @@ export default function DashboardPage() {
         },
         {
           uid: "usr-02",
-          email: "moderator@creditbuddy.co.in",
+          email: "moderator@creditbuddy.org.in",
           displayName: "Ananya Mishra",
           role: "moderator",
           createdAt: "2026-09-18T14:30:00.000Z",
@@ -226,7 +226,7 @@ export default function DashboardPage() {
   // Current display profile
   const currentProfile = userProfile || {
     uid: user?.uid || "guest",
-    email: user?.email || "student@creditbuddy.co.in",
+    email: user?.email || "student@creditbuddy.org.in",
     displayName: user?.displayName || "Learner Member",
     role: activeRole,
   };

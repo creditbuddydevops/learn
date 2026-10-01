@@ -103,7 +103,7 @@ export default function TermsPage() {
                 <p><strong>CIN:</strong> U62090OD2026PTC053104</p>
                 <p><strong>GSTIN:</strong> 21AANCC6754D1ZS</p>
                 <p><strong>Registered Address:</strong> Sambalpur, Odisha - 768004, India</p>
-                <p><strong>Legal Email:</strong> support@creditbuddy.co.in</p>
+                <p><strong>Legal Email:</strong> support@creditbuddy.org.in</p>
               </div>
             </div>
           </section>

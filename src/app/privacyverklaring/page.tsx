@@ -51,8 +51,8 @@ export default function PrivacyPage() {
           </h2>
           <p>
             For questions concerning your personal data or this Privacy Policy, please contact our team at{" "}
-            <DrawLineLink href="mailto:support@creditbuddy.co.in" className="text-[#0038ff] font-semibold">
-              support@creditbuddy.co.in
+            <DrawLineLink href="mailto:support@creditbuddy.org.in" className="text-[#0038ff] font-semibold">
+              support@creditbuddy.org.in
             </DrawLineLink>{" "}
             or write to our registered office in Budharaja, Sambalpur, Odisha - 768004.
           </p>

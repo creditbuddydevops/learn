@@ -190,11 +190,11 @@ export default function ContactPage() {
                     Direct Contact
                   </div>
                   <div className="flex flex-col space-y-2">
-                    <DrawLineLink href="mailto:support@creditbuddy.co.in" className="text-[#0038ff] font-semibold text-lg">
-                      support@creditbuddy.co.in
+                    <DrawLineLink href="mailto:support@creditbuddy.org.in" className="text-[#0038ff] font-semibold text-lg">
+                      support@creditbuddy.org.in
                     </DrawLineLink>
-                    <DrawLineLink href="mailto:learn@creditbuddy.co.in" className="text-[#101010] font-semibold text-base">
-                      learn@creditbuddy.co.in
+                    <DrawLineLink href="mailto:learn@creditbuddy.org.in" className="text-[#101010] font-semibold text-base">
+                      learn@creditbuddy.org.in
                     </DrawLineLink>
                   </div>
                 </div>

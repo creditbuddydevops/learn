@@ -112,10 +112,10 @@ export const Footer = () => {
               Odisha - 768004, India
             </p>
             <DrawLineLink
-              href="mailto:support@creditbuddy.co.in"
+              href="mailto:support@creditbuddy.org.in"
               className="text-base text-[#05aa38] hover:text-white pt-2"
             >
-              support@creditbuddy.co.in
+              support@creditbuddy.org.in
             </DrawLineLink>
           </div>
 
