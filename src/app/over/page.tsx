@@ -41,6 +41,60 @@ export default function OverPage() {
             />
           </div>
         </div>
+
+        {/* Deep Dive Pillars Section */}
+        <div className="my-20 space-y-12">
+          <div className="max-w-3xl">
+            <h2 className="heading-m text-3xl sm:text-4xl font-bold text-[#101010] mb-4">
+              Why Credit Literacy Matters Across India
+            </h2>
+            <p className="text-lg text-[#101010]/80 leading-relaxed">
+              In India's rapidly growing digital economy, access to personal, business, and micro-loans has never been faster. However, millions of borrowers remain unaware of how credit bureaus like CIBIL and Experian track repayment history, how annual percentage rates (APR) differ from advertised monthly interest rates, or how to resolve reporting errors.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div className="bg-white rounded-3xl p-8 border border-black/5 shadow-sm space-y-3">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#05aa38] block">
+                Pillar 01
+              </span>
+              <h3 className="text-2xl font-bold text-[#101010]">Demystifying Bureau Scoring</h3>
+              <p className="text-base text-[#101010]/70 leading-relaxed">
+                We break down the exact mathematical formula used by credit bureaus. Learn how payment history (35%), credit utilization (30%), credit age (15%), credit mix (10%), and inquiries (10%) combine to determine your borrowing health.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-3xl p-8 border border-black/5 shadow-sm space-y-3">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#0038ff] block">
+                Pillar 02
+              </span>
+              <h3 className="text-2xl font-bold text-[#101010]">Unmasking Hidden Loan Costs</h3>
+              <p className="text-base text-[#101010]/70 leading-relaxed">
+                Many borrowers fall for 'flat interest rate' marketing without realizing a 10% flat rate equals nearly 18%-20% reducing interest. We teach borrowers how to evaluate Key Fact Statements (KFS) and calculate real APR.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-3xl p-8 border border-black/5 shadow-sm space-y-3">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#21105b] block">
+                Pillar 03
+              </span>
+              <h3 className="text-2xl font-bold text-[#101010]">Structured Debt Acceleration</h3>
+              <p className="text-base text-[#101010]/70 leading-relaxed">
+                Whether managing personal loans, credit card balances, or working capital debt, our structured Snowball and Avalanche debt payoff models help borrowers eliminate obligations systematically.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-3xl p-8 border border-black/5 shadow-sm space-y-3">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#fec602] block">
+                Pillar 04
+              </span>
+              <h3 className="text-2xl font-bold text-[#101010]">Corporate Responsibility</h3>
+              <p className="text-base text-[#101010]/70 leading-relaxed">
+                Operated by CREDITBUDDY PARTNERS PRIVATE LIMITED (CIN: U62090OD2026PTC053104), our platform adheres to strict transparency, financial privacy, and ethical lending practices under RBI guidelines.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Team Parallax component */}

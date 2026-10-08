@@ -108,6 +108,50 @@ export default function WerkPage() {
           ))}
         </div>
 
+        {/* Why Learn With Us Section */}
+        <div className="my-20 pt-16 border-t border-black/10">
+          <div className="max-w-3xl mb-12">
+            <h2 className="heading-m text-3xl sm:text-4xl font-bold text-[#101010] mb-4">
+              Designed by Underwriters, Built for Everyday Borrowers
+            </h2>
+            <p className="text-base sm:text-lg text-[#101010]/80 leading-relaxed">
+              Most financial courses focus on complex stock market jargon or abstract macroeconomics. CreditBuddy Learn focuses exclusively on the numbers that affect your real-world wallet: credit bureau scoring, interest rate formulas, loan amortization schedules, and debt acceleration strategies.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-16">
+            <div className="bg-white p-8 rounded-3xl border border-black/5 shadow-sm space-y-3">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#05aa38] block">
+                Feature 01
+              </span>
+              <h3 className="text-xl font-bold text-[#101010]">Practical Sample Statements</h3>
+              <p className="text-sm text-[#101010]/70 leading-relaxed">
+                Learn using actual CIBIL, Experian, and bank statement extracts so you know exactly what credit managers analyze when reviewing loan applications.
+              </p>
+            </div>
+
+            <div className="bg-white p-8 rounded-3xl border border-black/5 shadow-sm space-y-3">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#0038ff] block">
+                Feature 02
+              </span>
+              <h3 className="text-xl font-bold text-[#101010]">Calculators &amp; Templates</h3>
+              <p className="text-sm text-[#101010]/70 leading-relaxed">
+                Every track comes equipped with interactive Excel/web spreadsheets for debt avalanche tracking, flat-to-reducing rate conversion, and FOIR estimation.
+              </p>
+            </div>
+
+            <div className="bg-white p-8 rounded-3xl border border-black/5 shadow-sm space-y-3">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#21105b] block">
+                Feature 03
+              </span>
+              <h3 className="text-xl font-bold text-[#101010]">Career Readiness</h3>
+              <p className="text-sm text-[#101010]/70 leading-relaxed">
+                Gain foundational knowledge essential for careers in retail banking, fintech credit operations, risk analysis, and NBFC loan processing.
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Bottom CTA */}
         <div className="text-center py-12 border-t border-black/10">
           <h2 className="heading-m text-3xl sm:text-4xl font-bold mb-6">

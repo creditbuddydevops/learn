@@ -214,9 +214,42 @@ export default async function CaseStudyPage({ params }: Props) {
             <p className="paragraph-m text-lg sm:text-xl text-[#101010]/80 leading-relaxed mb-8">
               {data.description}
             </p>
-            <p className="paragraph-m text-lg sm:text-xl text-[#101010]/80 leading-relaxed">
+            <p className="paragraph-m text-lg sm:text-xl text-[#101010]/80 leading-relaxed mb-12">
               Every lesson includes real sample statements, arithmetic calculators, and clear step-by-step actions you can apply to your personal finances or loan applications right away.
             </p>
+
+            {/* Detailed Learning Outcomes */}
+            <div className="space-y-8 pt-8 border-t border-black/10">
+              <h3 className="heading-s text-2xl font-bold text-[#101010]">
+                What You Will Master in This Track
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="bg-white p-6 rounded-2xl border border-black/5 space-y-2">
+                  <h4 className="font-bold text-lg text-[#101010]">1. Bureau &amp; Lenders Rules</h4>
+                  <p className="text-sm text-[#101010]/70 leading-relaxed">
+                    Understand the underlying algorithms, risk thresholds, and compliance norms enforced by financial regulators and credit rating agencies.
+                  </p>
+                </div>
+                <div className="bg-white p-6 rounded-2xl border border-black/5 space-y-2">
+                  <h4 className="font-bold text-lg text-[#101010]">2. Mathematical Formulas</h4>
+                  <p className="text-sm text-[#101010]/70 leading-relaxed">
+                    Master step-by-step mathematical calculations for interest rates, APR, reducing balances, and monthly amortization schedules.
+                  </p>
+                </div>
+                <div className="bg-white p-6 rounded-2xl border border-black/5 space-y-2">
+                  <h4 className="font-bold text-lg text-[#101010]">3. Actionable Spreadsheets</h4>
+                  <p className="text-sm text-[#101010]/70 leading-relaxed">
+                    Download and utilize customizable financial tools, dispute letter templates, and debt payoff trackers designed for quick application.
+                  </p>
+                </div>
+                <div className="bg-white p-6 rounded-2xl border border-black/5 space-y-2">
+                  <h4 className="font-bold text-lg text-[#101010]">4. Real-World Application</h4>
+                  <p className="text-sm text-[#101010]/70 leading-relaxed">
+                    Apply these concepts directly to personal borrowing, small business cash flow management, or careers in credit analysis and underwriting.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="lg:col-span-4 bg-white rounded-3xl p-8 sm:p-10 shadow-lg border border-black/5">

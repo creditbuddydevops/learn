@@ -215,6 +215,41 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
+
+        {/* Corporate Communication & Support Section */}
+        <div className="mt-20 pt-16 border-t border-black/10">
+          <div className="max-w-3xl mb-12">
+            <h2 className="heading-m text-3xl font-bold text-[#101010] mb-4">
+              How We Help Borrowers &amp; Students
+            </h2>
+            <p className="text-base sm:text-lg text-[#101010]/80 leading-relaxed">
+              Whether you have questions regarding CIBIL credit report disputes, understanding loan amortization formulas, or navigating loan applications on the CreditBuddy mobile app, our dedicated support team is available to assist you.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+            <div className="bg-white p-6 sm:p-8 rounded-3xl border border-black/5 space-y-2">
+              <h3 className="text-lg font-bold text-[#101010]">Educational Track Guidance</h3>
+              <p className="text-sm text-[#101010]/70 leading-relaxed">
+                Have questions about our modules or calculators? Email us at <strong className="text-[#101010]">learn@creditbuddy.org.in</strong> for curriculum assistance.
+              </p>
+            </div>
+
+            <div className="bg-white p-6 sm:p-8 rounded-3xl border border-black/5 space-y-2">
+              <h3 className="text-lg font-bold text-[#101010]">App &amp; Loan Support</h3>
+              <p className="text-sm text-[#101010]/70 leading-relaxed">
+                For in-app loan status, account verification, or repayment queries, write to <strong className="text-[#101010]">support@creditbuddy.org.in</strong>. Response time is typically within 24 hours.
+              </p>
+            </div>
+
+            <div className="bg-white p-6 sm:p-8 rounded-3xl border border-black/5 space-y-2">
+              <h3 className="text-lg font-bold text-[#101010]">Corporate Offices</h3>
+              <p className="text-sm text-[#101010]/70 leading-relaxed">
+                CREDITBUDDY PARTNERS PRIVATE LIMITED operates from Sambalpur, Odisha (768004). Physical visits are welcomed during official business hours (Mon-Fri, 10 AM - 6 PM IST).
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

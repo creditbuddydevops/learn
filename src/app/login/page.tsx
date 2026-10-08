@@ -277,6 +277,17 @@ export default function LoginPage() {
           </p>
         </div>
 
+        {/* Learning Portal Benefits Box for SEO & User Guidance */}
+        <div className="mt-6 p-5 rounded-xl bg-white border border-black/10 text-xs text-[#101010]/80 space-y-2 shadow-sm">
+          <h3 className="font-bold text-sm text-[#101010]">Why Sign In to CreditBuddy Learn?</h3>
+          <ul className="list-disc list-inside space-y-1.5 text-xs text-[#101010]/70 leading-relaxed">
+            <li>Track your progress across 6 core credit &amp; underwriting modules.</li>
+            <li>Access interactive credit score simulators, amortization tools, and FOIR calculators.</li>
+            <li>Download official bureau dispute letter templates for CIBIL &amp; Experian.</li>
+            <li>Earn verifiable course completion certificates for your financial resume.</li>
+          </ul>
+        </div>
+
         {/* reCAPTCHA Branding Notice (required by Google ToS) */}
         <p className="mt-4 text-center text-[10px] text-[#101010]/40 leading-relaxed">
           This site is protected by reCAPTCHA Enterprise and the Google{" "}

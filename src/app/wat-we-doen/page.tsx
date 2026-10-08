@@ -77,6 +77,43 @@ export default function WatWeDoenPage() {
           </div>
         </div>
       </div>
+
+      {/* Practical Deliverables Breakdown */}
+      <div className="py-20 bg-[#f4f4f4]">
+        <div className="w-full max-w-[1720px] mx-auto px-6 sm:px-10 md:px-14">
+          <div className="max-w-3xl mb-12">
+            <h2 className="heading-m text-3xl sm:text-4xl font-bold text-[#101010] mb-4">
+              Real Financial Tools, Zero Theoretical Jargon
+            </h2>
+            <p className="text-lg text-[#101010]/80 leading-relaxed">
+              Every course module at CreditBuddy Learn is designed alongside credit underwriters, bank managers, and financial analysts to give you practical skills you can apply immediately.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white p-8 rounded-3xl border border-black/5 shadow-sm space-y-3">
+              <h3 className="text-xl font-bold text-[#101010]">Interactive EMI &amp; APR Calculators</h3>
+              <p className="text-sm text-[#101010]/70 leading-relaxed">
+                Calculate total interest burden across different tenure options. Understand how processing fees, insurance charges, and GST affect your actual disbursement amount.
+              </p>
+            </div>
+
+            <div className="bg-white p-8 rounded-3xl border border-black/5 shadow-sm space-y-3">
+              <h3 className="text-xl font-bold text-[#101010]">Bureau Dispute Templates</h3>
+              <p className="text-sm text-[#101010]/70 leading-relaxed">
+                Access ready-to-use formal dispute letters for CIBIL, Experian, Equifax, and CRIF High Mark to correct clerical inaccuracies, outdated settlement tags, or wrong defaults.
+              </p>
+            </div>
+
+            <div className="bg-white p-8 rounded-3xl border border-black/5 shadow-sm space-y-3">
+              <h3 className="text-xl font-bold text-[#101010]">Underwriting Risk Scorecards</h3>
+              <p className="text-sm text-[#101010]/70 leading-relaxed">
+                Evaluate your personal bank statement health, check your Fixed Obligation to Income Ratio (FOIR), and optimize your borrowing profile before applying to lenders.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

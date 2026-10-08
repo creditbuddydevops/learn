@@ -6,27 +6,35 @@ import { Button052 } from "@/components/extrafazant/Button052";
 const FAQS = [
   {
     q: "What is CreditBuddy Learn?",
-    a: "CreditBuddy Learn is the educational initiative created by CreditBuddy (CREDITBUDDY PARTNERS PRIVATE LIMITED). While CreditBuddy provides fast, accessible loans in-app, CreditBuddy Learn provides structured guidance on credit scoring, interest rate formulas, loan underwriting, and debt management so you can borrow responsibly.",
+    a: "CreditBuddy Learn is the official financial literacy initiative created by CreditBuddy (CREDITBUDDY PARTNERS PRIVATE LIMITED). While CreditBuddy provides fast, accessible personal and business loans through our mobile app, CreditBuddy Learn delivers free, structured education on credit bureau scoring, interest rate formulas, risk underwriting, and debt repayment strategy.",
   },
   {
-    q: "Does CreditBuddy offer loans?",
-    a: "Yes! CreditBuddy is a fintech startup offering loans directly within our mobile application. We built CreditBuddy Learn so that our users and the broader public can understand loan terms, interest calculations, and repayment schedules with complete transparency.",
+    q: "Does CreditBuddy offer loans directly?",
+    a: "Yes! CreditBuddy is a fintech lending platform offering fast, transparent loans through our mobile application. We established CreditBuddy Learn because access to credit must be paired with financial education. Our goal is to ensure every borrower understands annual percentage rates (APR), reducing balance calculations, and debt-service ratios before borrowing.",
   },
   {
-    q: "Does checking my credit score lower my CIBIL score?",
-    a: "No. When you check your own score via CreditBuddy or credit bureau websites, it is logged as a 'soft inquiry' and has zero impact on your CIBIL or Experian score. A 'hard inquiry' only occurs when a lender checks your profile after you submit a formal loan application.",
+    q: "Does checking my credit score on CreditBuddy lower my CIBIL score?",
+    a: "No. Checking your own credit score through CreditBuddy or credit bureau portals (CIBIL, Experian, Equifax, CRIF High Mark) is classified as a 'soft inquiry'. Soft inquiries have zero impact on your credit score. Only 'hard inquiries' conducted by financial institutions when evaluating formal loan applications can temporarily lower your score.",
   },
   {
     q: "What is the difference between flat and reducing interest rates?",
-    a: "Under a flat rate, interest is charged on the entire initial principal amount for the full loan tenure, which effectively doubles the real borrowing cost. Under a reducing balance rate, interest is recalculated each month only on the remaining unpaid balance, saving you significant money as you pay down the loan.",
+    a: "Under a flat interest rate, interest is calculated on the initial principal amount for the full loan tenure, which effectively doubles your true interest expense. Under a reducing balance rate, interest is recalculated each month based solely on the remaining unpaid principal balance. CreditBuddy Learn teaches you how to convert flat rates to true reducing rates and demand Key Fact Statements (KFS).",
   },
   {
-    q: "What are the company's registered credentials?",
-    a: "CreditBuddy is operated by CREDITBUDDY PARTNERS PRIVATE LIMITED (CIN: U62090OD2026PTC053104, GSTIN: 21AANCC6754D1ZS), located at Gram Devi Mandir, Matru Vihar Shanti Nagar, Budharaja, Sambalpur, Odisha - 768004.",
+    q: "How does CreditBuddy calculate loan eligibility (FOIR)?",
+    a: "Lenders evaluate loan eligibility using the Fixed Obligation to Income Ratio (FOIR). FOIR measures what percentage of your monthly income is consumed by existing debt obligations (EMIs, credit card minimums). Most lenders cap total debt obligations at 40% to 50% of monthly net income. Our Loan Math track teaches you how to optimize your FOIR before applying.",
   },
   {
-    q: "How can I get assistance with a loan application or credit dispute?",
-    a: "You can reach out to our team at support@creditbuddy.org.in or submit an inquiry through our Contact page. Our practitioners are available to guide you on financial education topics.",
+    q: "How can I dispute errors on my CIBIL or Experian credit report?",
+    a: "If your credit report contains incorrect personal details, duplicate accounts, or settled loans wrongly marked as defaulted, you can file a formal dispute directly with CIBIL or Experian online. CreditBuddy Learn provides step-by-step dispute workflows and official dispute letter templates to clean up clerical errors.",
+  },
+  {
+    q: "What registered details govern CreditBuddy?",
+    a: "CreditBuddy is owned and operated by CREDITBUDDY PARTNERS PRIVATE LIMITED (CIN: U62090OD2026PTC053104, GSTIN: 21AANCC6754D1ZS). Our registered office is located at Gram Devi Mandir, Matru Vihar Shanti Nagar, Budharaja, Sambalpur, Odisha - 768004, India.",
+  },
+  {
+    q: "Are CreditBuddy Learn courses completely free?",
+    a: "Yes. All foundational learning modules, financial calculators, and credit score guides on CreditBuddy Learn are 100% free for students, job seekers, small business owners, and borrowers across India.",
   },
 ];
 
@@ -39,13 +47,13 @@ export default function FAQPage() {
         {/* Title */}
         <div className="max-w-4xl mb-16 sm:mb-20">
           <span className="eyebrow-m text-[#101010]/70 font-semibold mb-3 block">
-            Frequently Asked Questions
+            Frequently Asked Questions &amp; Knowledge Base
           </span>
           <h1 className="heading-xl tracking-tight text-[#101010] font-bold mb-6">
-            Clear answers to your <span className="heading-alt text-[#0038ff] italic">finance</span> questions.
+            Clear answers to your <span className="heading-alt text-[#0038ff] italic">credit &amp; lending</span> questions.
           </h1>
           <p className="paragraph-m text-[#101010]/80 text-lg sm:text-xl max-w-2xl leading-relaxed">
-            Everything you need to know about CreditBuddy, our lending app, and our educational curriculum.
+            Everything you need to know about CreditBuddy, our lending app, credit score rules, interest calculations, and our educational curriculum.
           </p>
         </div>
 
@@ -73,11 +81,13 @@ export default function FAQPage() {
                   </span>
                 </button>
 
-                {isOpen && (
-                  <div className="pt-4 text-base sm:text-lg text-[#101010]/70 leading-relaxed animate-in fade-in">
-                    {faq.a}
-                  </div>
-                )}
+                <div
+                  className={`pt-4 text-base sm:text-lg text-[#101010]/70 leading-relaxed ${
+                    isOpen ? "block" : "hidden"
+                  }`}
+                >
+                  {faq.a}
+                </div>
               </div>
             );
           })}
