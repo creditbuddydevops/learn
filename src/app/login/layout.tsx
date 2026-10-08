@@ -5,8 +5,8 @@ export const metadata: Metadata = {
   description:
     "Log in or create a student account on CreditBuddy Learn to access credit score mastery, loan underwriting, and personal finance courses.",
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
   },
 };
 

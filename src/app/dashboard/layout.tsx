@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     "Your CreditBuddy Learn student dashboard — track enrolled courses, view progress, and access learning materials.",
   robots: {
     index: false,
-    follow: false,
+    follow: true,
   },
 };
 
